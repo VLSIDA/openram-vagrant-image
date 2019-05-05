@@ -50,13 +50,15 @@ Vagrant.configure("2") do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider "virtualbox" do |vb|
+  config.vm.provider "virtualbox" do |vb|
   #   # Display the VirtualBox GUI when booting the machine
   #   vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
   #   vb.memory = "1024"
-  # end
+      vb.memory = "8192"
+      vb.cpus = "2"
+  end
   #
   # View the documentation for the provider you are using for more
   # information on available options.
@@ -69,6 +71,7 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
+  config.vm.provision "file", source: "screenrc", destination: "/home/vagrant/.screenrc"
   config.vm.provision "file", source: "set-paths.sh", destination: "/tmp"
   config.vm.provision "file", source: "PDKs.tar.gz", destination: "/tmp/PDKs.tar.gz"
   config.vm.provision "shell", inline: <<-SHELL
@@ -76,7 +79,7 @@ Vagrant.configure("2") do |config|
     apt-get --no-install-recommends -y upgrade
 
     # Enable X11 forwarding
-    echo "X11UseLocalhost no" >> /etc/sshd_config
+    echo "X11UseLocalhost no" >> /etc/ssh/sshd_config
   
     ### Dependencies ###
     # General tools for building etc.
@@ -86,8 +89,8 @@ Vagrant.configure("2") do |config|
     rm /bin/sh && ln -s /bin/bash /bin/sh
     # Needed by OpenRAM 
     apt-get install --no-install-recommends -y  python3 python3-numpy python3-scipy
-    # Needed by Netgen
-    apt-get install --no-install-recommends -y m4 csh  tk tk-dev tcl-dev
+    # Needed by Netgen and Magic
+    apt-get install --no-install-recommends -y m4 csh  tk tk-dev tcl-dev blt-dev
     # Needed by ngspice
     apt-get install --no-install-recommends -y libxaw7-dev
     # X11 dev not used
