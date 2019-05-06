@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
-  # config.vm.box_check_update = false
+  config.vm.box_check_update = false
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -45,6 +45,7 @@ Vagrant.configure("2") do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   config.vm.synced_folder "data", "/vagrant_data"
+  config.vm.synced_folder "software", "/software"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -71,8 +72,7 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "file", source: "screenrc", destination: "/home/vagrant/.screenrc"
-  config.vm.provision "file", source: "set-paths.sh", destination: "/tmp"
+  config.vm.provision "file", source: "~/.screenrc", destination: "/home/vagrant/.screenrc"
   config.vm.provision "file", source: "PDKs.tar.gz", destination: "/tmp/PDKs.tar.gz"
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
@@ -95,12 +95,11 @@ Vagrant.configure("2") do |config|
     apt-get install --no-install-recommends -y libxaw7-dev
     # X11 dev not used
     apt-get install --no-install-recommends -y libx11-dev libcairo2-dev
-    ### Magic ###
 
+    ### Magic ###
     # This would install the default Ubuntu version which
     # is an old one...
     #apt-get install --no-install-recommends -y magic
-
     cd
     git clone git://opencircuitdesign.com/magic-8.2
     cd magic-8.2
@@ -114,7 +113,6 @@ Vagrant.configure("2") do |config|
     git clone git://git.code.sf.net/p/ngspice/ngspice
     cd ngspice
     ./autogen.sh && ./configure --enable-openmp && make -j$(nproc) && make install
-    #rm -rf /root/ngspice
 
     ### Netgen ###
     cd
@@ -124,11 +122,9 @@ Vagrant.configure("2") do |config|
     #rm -rf /root/netgen-1.5
 
     ### FREEPDK 15 and 45 PDKs ###
+    # The Free PDKs
     tar zxvf /tmp/PDKs.tar.gz -C /home
-    # Tool setup paths
-    mv /tmp/set-paths /etc/skel
-    chmod 755 /etc/skel/set-paths.sh
-    echo "source /etc/skel/set-paths.sh" >> /etc/skel/.bashrc
+    echo "source /software/setup.sh" >> /home/vagrant/.bashrc
 
     # CAD dependencies
     # Needed by calibre
