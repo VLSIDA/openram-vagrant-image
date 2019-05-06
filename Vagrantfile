@@ -1,4 +1,5 @@
 
+
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
@@ -40,6 +41,10 @@ Vagrant.configure("2") do |config|
   # your network.
   # config.vm.network "public_network"
 
+  # Allow X11 forwarding
+  config.ssh.forward_x11 = true
+  config.ssh.forward_agent = true
+
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
@@ -52,6 +57,7 @@ Vagrant.configure("2") do |config|
   # Example for VirtualBox:
   #
   config.vm.provider "virtualbox" do |vb|
+      vb.name = "openram"
   #   # Display the VirtualBox GUI when booting the machine
   #   vb.gui = true
   #
@@ -65,22 +71,13 @@ Vagrant.configure("2") do |config|
   # information on available options.
 
 
-  # Allow X11 forwarding
-  config.ssh.forward_x11 = true
-  config.ssh.forward_agent = true
-
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "file", source: "~/.screenrc", destination: "/home/vagrant/.screenrc"
-  config.vm.provision "file", source: "PDKs.tar.gz", destination: "/tmp/PDKs.tar.gz"
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
     apt-get --no-install-recommends -y upgrade
 
-    # Enable X11 forwarding
-    echo "X11UseLocalhost no" >> /etc/ssh/sshd_config
-  
     ### Dependencies ###
     # General tools for building etc.
     apt-get install --no-install-recommends -y build-essential git ssh vim gosu
@@ -95,36 +92,6 @@ Vagrant.configure("2") do |config|
     apt-get install --no-install-recommends -y libxaw7-dev
     # X11 dev not used
     apt-get install --no-install-recommends -y libx11-dev libcairo2-dev
-
-    ### Magic ###
-    # This would install the default Ubuntu version which
-    # is an old one...
-    #apt-get install --no-install-recommends -y magic
-    cd
-    git clone git://opencircuitdesign.com/magic-8.2
-    cd magic-8.2
-    ./configure && make -j$(nproc) && make install
-
-    ### Ngspice ###
-    #This would install ngspice 29 which is old
-    #apt-get install --no-install-recommends -y ngspice
-    # Compile the newest
-    cd
-    git clone git://git.code.sf.net/p/ngspice/ngspice
-    cd ngspice
-    ./autogen.sh && ./configure --enable-openmp && make -j$(nproc) && make install
-
-    ### Netgen ###
-    cd
-    git clone git://opencircuitdesign.com/netgen-1.5
-    cd netgen-1.5
-    ./configure && make -j$(nproc) && make install
-    #rm -rf /root/netgen-1.5
-
-    ### FREEPDK 15 and 45 PDKs ###
-    # The Free PDKs
-    tar zxvf /tmp/PDKs.tar.gz -C /home
-    echo "source /software/setup.sh" >> /home/vagrant/.bashrc
 
     # CAD dependencies
     # Needed by calibre
@@ -152,8 +119,45 @@ Vagrant.configure("2") do |config|
     apt-get install -y --no-install-recommends lsb lsb-release lsb-core
     # Interactive tools
     apt-get install -y --no-install-recommends emacs screen gdb
-
-
-
   SHELL
+
+  config.vm.provision "shell", run: "first", inline: <<-SHELL
+    ### Magic ###
+    # This would install the default Ubuntu version which
+    # is an old one...
+    #apt-get install --no-install-recommends -y magic
+    cd
+    git clone git://opencircuitdesign.com/magic-8.2
+    cd magic-8.2
+    ./configure && make -j$(nproc) && make install
+
+    ### Ngspice ###
+    #This would install ngspice 29 which is old
+    #apt-get install --no-install-recommends -y ngspice
+    # Compile the newest
+    cd
+    git clone git://git.code.sf.net/p/ngspice/ngspice
+    cd ngspice
+    ./autogen.sh && ./configure --enable-openmp && make -j$(nproc) && make install
+
+    ### Netgen ###
+    cd
+    git clone git://opencircuitdesign.com/netgen-1.5
+    cd netgen-1.5
+    ./configure && make -j$(nproc) && make install
+  SHELL
+
+
+  ### FREEPDK 15 and 45 PDKs ###
+  config.vm.provision "file", run: "once", source: "~/.screenrc", destination: "/home/vagrant/.screenrc"
+  config.vm.provision "file", run: "once", source: "PDKs.tar.gz", destination: "/tmp/PDKs.tar.gz"
+  config.vm.provision "shell", run: "once", inline: <<-SHELL
+    # Enable X11 forwarding
+    echo "X11UseLocalhost no" >> /etc/ssh/sshd_config
+
+    # The Free PDKs
+    tar zxvf /tmp/PDKs.tar.gz -C /home
+    echo "source /software/setup.sh" >> /home/vagrant/.bashrc
+  SHELL
+
 end
