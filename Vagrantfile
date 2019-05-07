@@ -149,7 +149,7 @@ Vagrant.configure("2") do |config|
 
 
   ### FREEPDK 15 and 45 PDKs ###
-  config.vm.provision "file", run: "once", source: "~/.screenrc", destination: "/home/vagrant/.screenrc"
+  config.vm.provision "file", run: "once", source: "screenrc", destination: "/home/vagrant/.screenrc"
   config.vm.provision "file", run: "once", source: "PDKs.tar.gz", destination: "/tmp/PDKs.tar.gz"
   config.vm.provision "shell", run: "once", inline: <<-SHELL
     # Enable X11 forwarding
