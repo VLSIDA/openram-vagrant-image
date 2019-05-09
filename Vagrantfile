@@ -77,7 +77,9 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
     apt-get --no-install-recommends -y upgrade
+  SHELL
 
+  config.vm.provision "shell", run: "first", inline: <<-SHELL
     ### Dependencies ###
     # General tools for building etc.
     apt-get install --no-install-recommends -y build-essential git ssh vim gosu
@@ -121,7 +123,7 @@ Vagrant.configure("2") do |config|
     apt-get install -y --no-install-recommends emacs screen gdb
   SHELL
 
-  config.vm.provision "shell", run: "first", inline: <<-SHELL
+  config.vm.provision "shell", run: "once", inline: <<-SHELL
     ### Magic ###
     # This would install the default Ubuntu version which
     # is an old one...
@@ -154,7 +156,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", run: "once", inline: <<-SHELL
     # Enable X11 forwarding
     echo "X11UseLocalhost no" >> /etc/ssh/sshd_config
-
     # The Free PDKs
     tar zxvf /tmp/PDKs.tar.gz -C /home
     echo "source /software/setup.sh" >> /home/vagrant/.bashrc
