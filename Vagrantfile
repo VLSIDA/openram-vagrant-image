@@ -1,5 +1,3 @@
-
-
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
@@ -49,8 +47,9 @@ Vagrant.configure("2") do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder "data", "/vagrant_data"
-  config.vm.synced_folder "software", "/software"
+  #config.vm.synced_folder "/mnt/c/Users/mguth/.ssh", ".ssh"
+  config.vm.synced_folder "/mnt/c/vagrant/data", "/data"
+  #config.vm.synced_folder "/mnt/c/vagrant/software", "/software"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -65,6 +64,23 @@ Vagrant.configure("2") do |config|
   #   vb.memory = "1024"
       vb.memory = "8192"
       vb.cpus = "2"
+
+      file_to_disk = '/vagrant/software/software.vmdk'
+      #unless File.exist?(file_to_disk)
+      #  vb.customize ['createmedium',
+#		      'disk',
+ #                     '--filename', file_to_disk, 
+#i		      '--size', 20 * 1024,
+ #                     '--format', 'vmdk',
+ #                     '--variant', 'Split2G']
+ #     end
+      vb.customize ['storageattach', :id,
+                    '--storagectl', 'IDE Controller', 
+	            '--port', 1,
+                    '--device', 0,
+                    '--type', 'hdd',
+                    '--medium', file_to_disk]
+                   
   end
   #
   # View the documentation for the provider you are using for more
@@ -111,6 +127,10 @@ Vagrant.configure("2") do |config|
     wget -q -O /tmp/libpng12.deb http://mirrors.kernel.org/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1_amd64.deb \
     && dpkg -i /tmp/libpng12.deb \
     && rm /tmp/libpng12.deb
+    # Needed by Innovus
+    wget -q -O /tmp/libxp6.deb https://ftp.us.debian.org/debian/pool/main/libx/libxp/libxp6_1.0.2-2_amd64.deb \
+    && dpkg -i /tmp/libxp6.deb \
+    && rm /tmp/libxp6.deb
 
     ### Utilities ###
     # X11
