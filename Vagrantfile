@@ -145,6 +145,13 @@ Vagrant.configure("2") do |config|
     git clone git://opencircuitdesign.com/netgen-1.5
     cd netgen-1.5
     ./configure && make -j$(nproc) && make install
+
+    ### KLayout ###
+    cd
+    apt-get install -y --no-install-recommends qt5-make qt5-default qtcreator ruby-full
+    git clone https://github.com/KLayout/klayout.git
+    cd klayout
+    ./build.sh -qt5
   SHELL
 
 
