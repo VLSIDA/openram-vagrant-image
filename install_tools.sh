@@ -15,7 +15,7 @@ cd magic-8.2
 cd
 git clone git://git.code.sf.net/p/ngspice/ngspice
 cd ngspice
-./autogen.sh && ./configure --enable-openmp && make -j$(nproc) && make install
+./autogen.sh && ./configure --enable-openmp --with-readline && make -j$(nproc) && make install
 
 ### Netgen ###
 cd

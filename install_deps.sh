@@ -12,7 +12,7 @@ apt-get install --no-install-recommends -y  python3 python3-numpy python3-scipy 
 # Needed by Netgen and Magic
 apt-get install --no-install-recommends -y m4 csh  tk tk-dev tcl-dev blt-dev
 # Needed by ngspice
-apt-get install --no-install-recommends -y libxaw7-dev
+apt-get install --no-install-recommends -y libxaw7-dev libreadline7 libreadline-dev
 # X11 dev not used
 apt-get install --no-install-recommends -y libx11-dev libcairo2-dev
 
@@ -41,7 +41,7 @@ wget -q -O /tmp/libxp6.deb https://ftp.us.debian.org/debian/pool/main/libx/libxp
 # X11
 apt-get install -y --no-install-recommends x11-xserver-utils
 # Network debug tools (can be removed to save space)
-apt-get install --no-install-recommends -y iputils-ping net-tools lsof wget whois nmap telnet curl dnsutils tcpdump traceroute
+apt-get install --no-install-recommends -y iputils-ping net-tools lsof wget whois nmap telnet curl dnsutils tcpdump traceroute id-utils
 # Needed to run lmstat
 apt-get install -y --no-install-recommends lsb lsb-release lsb-core
 # Interactive tools

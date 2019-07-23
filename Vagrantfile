@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
-  config.vm.box_check_update = false
+  #config.vm.box_check_update = false
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -39,6 +39,12 @@ Vagrant.configure("2") do |config|
   # your network.
   # config.vm.network "public_network"
 
+  # if Vagrant.has_plugin? "vagrant-vbguest"
+  #   config.vbguest.no_install  = true
+  #   config.vbguest.auto_update = false
+  #   config.vbguest.no_remote   = true
+  # end
+
   # Allow X11 forwarding
   config.ssh.forward_x11 = true
   config.ssh.forward_agent = true
@@ -48,8 +54,9 @@ Vagrant.configure("2") do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   #config.vm.synced_folder "/mnt/c/Users/mguth/.ssh", ".ssh"
+  #config.vm.synced_folder "/Users/mrg/.ssh", "/home/vagrant/.ssh"  
   #config.vm.synced_folder "/mnt/c/vagrant/data", "/data"
-  config.vm.synced_folder "data", "/data"
+  config.vm.synced_folder "openram", "/home/vagrant/openram"
   #config.vm.synced_folder "/mnt/c/vagrant/software", "/software"
 
   # Provider-specific configuration so you can fine-tune various
@@ -62,19 +69,12 @@ Vagrant.configure("2") do |config|
   #   vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1024"
       vb.memory = "8192"
-      vb.cpus = "2"
+      vb.cpus = "3"
 
+      # Add this to the /etc/fstab
+      # UUID=562fd98c-b2e0-4c1a-a460-d724d8f606e4 /software	  ext3    defaults 	  0	  0
       file_to_disk = '/Users/mrg/openram-vagrant-image/software/software.vmdk'
-      #unless File.exist?(file_to_disk)
-      #  vb.customize ['createmedium',
-#		      'disk',
- #                     '--filename', file_to_disk, 
-#i		      '--size', 20 * 1024,
- #                     '--format', 'vmdk',
- #                     '--variant', 'Split2G']
- #     end
       vb.customize ['storageattach', :id,
                     '--storagectl', 'IDE Controller', 
 	            '--port', 1,
@@ -86,7 +86,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", run: "once", path: "install_deps.sh"
   config.vm.provision "shell", run: "once", path: "install_tools.sh"
-  config.vm.provision "file", run: "first", source: "screenrc", destination: "/home/vagrant/.screenrc"
   config.vm.provision "file", run: "first", source: "PDKs.tar.gz", destination: "/tmp/PDKs.tar.gz"
   config.vm.provision "shell", run: "first", inline: <<-SHELL
     # Enable X11 forwarding
