@@ -70,7 +70,7 @@ Vagrant.configure("2") do |config|
   #
   #   # Customize the amount of memory on the VM:
       vb.memory = "8192"
-      vb.cpus = "3"
+      vb.cpus = "2"
 
       # Add this to the /etc/fstab
       # UUID=562fd98c-b2e0-4c1a-a460-d724d8f606e4 /software	  ext3    defaults 	  0	  0

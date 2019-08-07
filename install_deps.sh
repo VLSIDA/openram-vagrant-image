@@ -39,10 +39,16 @@ wget -q -O /tmp/libxp6.deb https://ftp.us.debian.org/debian/pool/main/libx/libxp
 
 ### Utilities ###
 # X11
-apt-get install -y --no-install-recommends x11-xserver-utils
+apt-get install --no-install-recommends -y x11-xserver-utils
 # Network debug tools (can be removed to save space)
 apt-get install --no-install-recommends -y iputils-ping net-tools lsof wget whois nmap telnet curl dnsutils tcpdump traceroute id-utils
 # Needed to run lmstat
-apt-get install -y --no-install-recommends lsb lsb-release lsb-core
+apt-get install --no-install-recommends -y lsb lsb-release lsb-core
 # Interactive tools
-apt-get install -y --no-install-recommends emacs screen gdb
+apt-get install --no-install-recommends -y emacs screen gdb python3-setuptools
+# Code stuff for elpy
+python3 -m pip install jedi autopep8 rope flake8 yapf black
+# Openvpn
+apt-get install --no-install-recommends -y openconnect lib32ncurses5 lib32tinfo5 lib32z1 libc6-i386 libpkcs11-helper1 openvpn vpnc-scripts net-tools
+#wget -q -O /usr/local/bin/ucivpnup http://www.socsci.uci.edu/~jstern/uci_vpn_ubuntu/ucivpnup.txt
+#wget -q -O /usr/local/bin/ucivpndown http://www.socsci.uci.edu/~jstern/uci_vpn_ubuntu/ucivpndown.txt
