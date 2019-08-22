@@ -11,8 +11,8 @@ rm /bin/sh && ln -s /bin/bash /bin/sh
 apt-get install --no-install-recommends -y  python3 python3-numpy python3-scipy python3-pip
 # Needed by Netgen and Magic
 apt-get install --no-install-recommends -y m4 csh  tk tk-dev tcl-dev blt-dev
-# Needed by ngspice
-apt-get install --no-install-recommends -y libxaw7-dev libreadline7 libreadline-dev
+# Needed by ngspice (octave for viewing)
+apt-get install --no-install-recommends -y libxaw7-dev libreadline7 libreadline-dev octave
 # X11 dev not used
 apt-get install --no-install-recommends -y libx11-dev libcairo2-dev
 
@@ -52,3 +52,6 @@ python3 -m pip install jedi autopep8 rope flake8 yapf black
 apt-get install --no-install-recommends -y openconnect lib32ncurses5 lib32tinfo5 lib32z1 libc6-i386 libpkcs11-helper1 openvpn vpnc-scripts net-tools
 #wget -q -O /usr/local/bin/ucivpnup http://www.socsci.uci.edu/~jstern/uci_vpn_ubuntu/ucivpnup.txt
 #wget -q -O /usr/local/bin/ucivpndown http://www.socsci.uci.edu/~jstern/uci_vpn_ubuntu/ucivpndown.txt
+
+wget https://sourceforge.net/projects/ngspice/files/ng-spice-rework/old-releases/contrib/octave_spice.tar.gz
+

@@ -57,6 +57,7 @@ Vagrant.configure("2") do |config|
   #config.vm.synced_folder "/Users/mrg/.ssh", "/home/vagrant/.ssh"  
   #config.vm.synced_folder "/mnt/c/vagrant/data", "/data"
   config.vm.synced_folder "openram", "/home/vagrant/openram"
+  config.vm.synced_folder "../vagrant_data", "/home/vagrant/data"
   #config.vm.synced_folder "/mnt/c/vagrant/software", "/software"
 
   # Provider-specific configuration so you can fine-tune various
