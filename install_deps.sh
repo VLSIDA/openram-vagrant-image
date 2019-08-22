@@ -8,7 +8,7 @@ apt-get install --no-install-recommends -y autoconf automake libtool bison flex
 # Use bash instead of dash
 rm /bin/sh && ln -s /bin/bash /bin/sh
 # Needed by OpenRAM 
-apt-get install --no-install-recommends -y  python3 python3-numpy python3-scipy python3-pip
+apt-get install --no-install-recommends -y  python3 python3-numpy python3-scipy python3-pip python3-matplotlib
 # Needed by Netgen and Magic
 apt-get install --no-install-recommends -y m4 csh  tk tk-dev tcl-dev blt-dev
 # Needed by ngspice (octave for viewing)
@@ -47,7 +47,7 @@ apt-get install --no-install-recommends -y lsb lsb-release lsb-core
 # Interactive tools
 apt-get install --no-install-recommends -y emacs screen gdb python3-setuptools
 # Code stuff for elpy
-python3 -m pip install jedi autopep8 rope flake8 yapf black
+python3 -m pip install jedi autopep8 rope flake8 yapf black 
 # Openvpn
 apt-get install --no-install-recommends -y openconnect lib32ncurses5 lib32tinfo5 lib32z1 libc6-i386 libpkcs11-helper1 openvpn vpnc-scripts net-tools
 #wget -q -O /usr/local/bin/ucivpnup http://www.socsci.uci.edu/~jstern/uci_vpn_ubuntu/ucivpnup.txt
