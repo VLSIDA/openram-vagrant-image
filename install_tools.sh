@@ -25,7 +25,6 @@ cd netgen-1.5
 
 ## KLayout ###
 cd
-apt-get install -y --no-install-recommends qt5-default qtcreator ruby-full ruby-dev python3-dev qtmultimedia5-dev libqt5multimediawidgets5 libqt5multimedia5-plugins libqt5multimedia5 libqt5svg5-dev libqt5designer5 libqt5designercomponents5 libqt5xmlpatterns5-dev qttools5-dev
 git clone https://github.com/KLayout/klayout
 cd klayout
 ./build.sh -qt5

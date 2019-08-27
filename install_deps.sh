@@ -36,6 +36,8 @@ wget -q -O /tmp/libpng12.deb http://mirrors.kernel.org/ubuntu/pool/main/libp/lib
 wget -q -O /tmp/libxp6.deb https://ftp.us.debian.org/debian/pool/main/libx/libxp/libxp6_1.0.2-2_amd64.deb \
 && dpkg -i /tmp/libxp6.deb \
 && rm /tmp/libxp6.deb
+# Needed for klayout
+apt-get install -y --no-install-recommends qt5-default qtcreator ruby-full ruby-dev python3-dev qtmultimedia5-dev libqt5multimediawidgets5 libqt5multimedia5-plugins libqt5multimedia5 libqt5svg5-dev libqt5designer5 libqt5designercomponents5 libqt5xmlpatterns5-dev qttools5-dev
 
 ### Utilities ###
 # X11
