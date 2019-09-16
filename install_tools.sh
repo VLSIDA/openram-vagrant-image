@@ -24,7 +24,8 @@ cd netgen-1.5
 ./configure && make -j$(nproc) && make install
 
 ## KLayout ###
-cd
-git clone https://github.com/KLayout/klayout
-cd klayout
-./build.sh -qt5
+#cd
+#git clone https://github.com/KLayout/klayout
+#cd klayout
+#./build.sh -qt5 
+#cp -r bin-release /software/klayout

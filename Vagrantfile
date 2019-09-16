@@ -57,7 +57,7 @@ Vagrant.configure("2") do |config|
   #config.vm.synced_folder "/Users/mrg/.ssh", "/home/vagrant/.ssh"  
   #config.vm.synced_folder "/mnt/c/vagrant/data", "/data"
   config.vm.synced_folder "openram", "/home/vagrant/openram"
-  config.vm.synced_folder "../vagrant_data", "/home/vagrant/data"
+  config.vm.synced_folder "data", "/home/vagrant/data"
   #config.vm.synced_folder "/mnt/c/vagrant/software", "/software"
 
   # Provider-specific configuration so you can fine-tune various
@@ -75,7 +75,7 @@ Vagrant.configure("2") do |config|
 
       # Add this to the /etc/fstab
       # UUID=562fd98c-b2e0-4c1a-a460-d724d8f606e4 /software	  ext3    defaults 	  0	  0
-      file_to_disk = '/Users/mrg/openram-vagrant-image/software/software.vmdk'
+      file_to_disk = '/vagrant/software/software.vmdk'
       vb.customize ['storageattach', :id,
                     '--storagectl', 'IDE Controller', 
 	            '--port', 1,
