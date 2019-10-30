@@ -58,6 +58,6 @@ On Windows in WSL, you need to install and start [vcxsrv](https://sourceforge.ne
 
 In both, make sure that the DISPLAY environment variable is set before you run "vagrant ssh":
 ```
-export <yourcomputer>:0.0
+export DISPLAY=<yourcomputer>:0.0
 ```
 After sshing into Vagrant, try running xcalc.
