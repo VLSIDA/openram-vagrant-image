@@ -55,5 +55,5 @@ apt-get install --no-install-recommends -y openconnect lib32ncurses5 lib32tinfo5
 #wget -q -O /usr/local/bin/ucivpnup http://www.socsci.uci.edu/~jstern/uci_vpn_ubuntu/ucivpnup.txt
 #wget -q -O /usr/local/bin/ucivpndown http://www.socsci.uci.edu/~jstern/uci_vpn_ubuntu/ucivpndown.txt
 
-wget https://sourceforge.net/projects/ngspice/files/ng-spice-rework/old-releases/contrib/octave_spice.tar.gz
+#wget https://sourceforge.net/projects/ngspice/files/ng-spice-rework/old-releases/contrib/octave_spice.tar.gz
 
