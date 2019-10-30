@@ -54,7 +54,7 @@ should go in C:\vagrant\software (/home/<user>/openram-vagrant-image/software).
 
 On macOS, you need to install and start [XQuartz](https://www.xquartz.org/).
 
-On Windows in WSL, you need to install and start [vcxsrv](https://sourceforge.net/projects/vcxsrv/).
+On Windows in WSL, you need to install and start [vcxsrv](https://sourceforge.net/projects/vcxsrv/) (Xlaunch). In the options, you can use the defaults, except you might need to check "Disable access control" to allow connections from Vagrant.
 
 In both, make sure that the DISPLAY environment variable is set before you run "vagrant ssh":
 ```
