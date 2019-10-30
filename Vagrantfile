@@ -53,12 +53,22 @@ Vagrant.configure("2") do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
+  
+  # These are optional if you want to share your personal keys
   #config.vm.synced_folder "/mnt/c/Users/mguth/.ssh", ".ssh"
-  #config.vm.synced_folder "/Users/mrg/.ssh", "/home/vagrant/.ssh"  
-  #config.vm.synced_folder "/mnt/c/vagrant/data", "/data"
-  config.vm.synced_folder "openram", "/home/vagrant/openram"
-  config.vm.synced_folder "data", "/home/vagrant/data"
-  #config.vm.synced_folder "/mnt/c/vagrant/software", "/software"
+  #config.vm.synced_folder "/Users/mrg/.ssh", "/home/vagrant/.ssh"
+
+  # Share a data directory with the host OS, must mkdir first.
+  # In Windows, this must be from the /mnt/c drive
+  config.vm.synced_folder "/mnt/c/vagrant/data", "/home/vagrant/data"
+  # On other systems, it can be local
+  #config.vm.synced_folder "data", "/home/vagrant/data"
+
+  # Share the source repo with the host OS. Must git clone first.
+  # In Windows, this must be from the /mnt/c drive
+  config.vm.synced_folder "/mnt/c/vagrant/openram", "/home/vagrant/openram"
+  # On other systems, it can be local
+  #config.vm.synced_folder "openram", "/home/vagrant/openram"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -73,9 +83,16 @@ Vagrant.configure("2") do |config|
       vb.memory = "8192"
       vb.cpus = "2"
 
-      # Add this to the /etc/fstab
+      # Add this to the /etc/fstab manually the first time
       # UUID=562fd98c-b2e0-4c1a-a460-d724d8f606e4 /software	  ext3    defaults 	  0	  0
-      file_to_disk = '/vagrant/software/software.vmdk'
+      # Also ensure that a directory /software exists to mount at.
+      
+      username = "#{ENV['USERNAME'] || `whoami`}"      
+      # In windows, this must be in the WSL partition
+      file_to_disk = '/home/#{username}/openram-vagrant-image/software/software.vmdk'
+      # On other OSes, it can be anywhere
+      #file_to_disk = '/vagrant/software/software.vmdk'
+      
       vb.customize ['storageattach', :id,
                     '--storagectl', 'IDE Controller', 
 	            '--port', 1,
