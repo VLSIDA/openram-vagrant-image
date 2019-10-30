@@ -28,4 +28,4 @@ cd
 git clone https://github.com/KLayout/klayout
 cd klayout
 ./build.sh -qt5 
-cp -r bin-release /software/klayout
+cp -r bin-release /usr/local/klayout
