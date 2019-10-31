@@ -86,10 +86,9 @@ Vagrant.configure("2") do |config|
       # Add this to the /etc/fstab manually the first time
       # UUID=562fd98c-b2e0-4c1a-a460-d724d8f606e4 /software	  ext3    defaults 	  0	  0
       # Also ensure that a directory /software exists to mount at.
-      
-      username = "#{ENV['USERNAME'] || `whoami`}"      
+
       # In windows, this must be in the WSL partition
-      file_to_disk = '/home/#{username}/openram-vagrant-image/software/software.vmdk'
+      file_to_disk = '/home/mrg/openram-vagrant-image/software/software.vmdk'
       # On other OSes, it can be anywhere
       #file_to_disk = '/vagrant/software/software.vmdk'
       
@@ -111,8 +110,8 @@ Vagrant.configure("2") do |config|
     # The Free PDKs
     tar zxvf /tmp/PDKs.tar.gz -C /home
     echo "source /software/setup.sh" >> /home/vagrant/.bashrc
+    echo "UUID=562fd98c-b2e0-4c1a-a460-d724d8f606e4 /software	  ext3    defaults 	  0	  0" >> /etc/fstab
+    mkdir /software
     # Reboot
     reboot
   SHELL
-
-end
