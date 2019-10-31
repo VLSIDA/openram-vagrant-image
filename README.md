@@ -33,6 +33,10 @@ vagrant provision
 ```
 vagrant reload
 ```
+* Install the guest addition updater:
+```
+vagrant plugin install vagrant-vbguest
+```
 * Connect to vagrant:
 ```
 vagrant ssh

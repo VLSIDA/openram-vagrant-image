@@ -76,10 +76,10 @@ Vagrant.configure("2") do |config|
   #
   config.vm.provider "virtualbox" do |vb|
       vb.name = "openram"
-  #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
+      # Display the VirtualBox GUI when booting the machine
+      #vb.gui = true
+  
+      # Customize the amount of memory on the VM:
       vb.memory = "8192"
       vb.cpus = "2"
 
@@ -88,9 +88,9 @@ Vagrant.configure("2") do |config|
       # Also ensure that a directory /software exists to mount at.
 
       # In windows, this must be in the WSL partition
-      file_to_disk = '/home/mrg/openram-vagrant-image/software/software.vmdk'
+      file_to_disk = "/home/mrg/openram-vagrant-image/software/software.vmdk"
       # On other OSes, it can be anywhere
-      #file_to_disk = '/vagrant/software/software.vmdk'
+      #file_to_disk = "vagrant/software/software.vmdk"
       
       vb.customize ['storageattach', :id,
                     '--storagectl', 'IDE Controller', 
@@ -115,3 +115,4 @@ Vagrant.configure("2") do |config|
     # Reboot
     reboot
   SHELL
+end
