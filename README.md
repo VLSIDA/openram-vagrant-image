@@ -25,9 +25,9 @@ git clone git@github.com:VLSIDA/OpenRAM.git openram
 (or PrivateRAM for my group)
 * Put proprietary tools in a software disk image:
 /vagrant/software/software.vmdk
-* Provision vagrant:
+* Start and provision vagrant:
 ```
-vagrant provision
+vagrant up --provision
 ```
 * Restart vagrant:
 ```
