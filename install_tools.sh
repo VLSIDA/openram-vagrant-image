@@ -6,6 +6,7 @@
 cd
 git clone git://opencircuitdesign.com/magic-8.2
 cd magic-8.2
+git checkout magic-8.2
 ./configure && make && make install
 
 ### Ngspice ###
@@ -21,6 +22,7 @@ cd ngspice
 cd
 git clone git://opencircuitdesign.com/netgen-1.5
 cd netgen-1.5
+git checkout netgen-1.5
 ./configure && make -j$(nproc) && make install
 
 ## KLayout ###
