@@ -10,7 +10,7 @@ apt-get install --no-install-recommends -y autoconf automake libtool bison flex
 # Use bash instead of dash
 rm /bin/sh && ln -s /bin/bash /bin/sh
 # Needed by OpenRAM 
-apt-get install --no-install-recommends -y  python3 python3-numpy python3-scipy python3-pip python3-matplotlib
+apt-get install --no-install-recommends -y  python3 python3-numpy python3-scipy python3-pip python3-matplotlib python3-venv
 # Needed by Netgen and Magic
 apt-get install --no-install-recommends -y m4 csh  tk tk-dev tcl-dev blt-dev
 # Needed by ngspice (octave for viewing)
