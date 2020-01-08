@@ -1,6 +1,8 @@
 #!/bin/bash
 apt-get update
-apt-get --no-install-recommends -y upgrade
+# Work-around for grup-pc interactive bug
+DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+#apt-get --no-install-recommends -y upgrade
 ### Dependencies ###
 # General tools for building etc.
 apt-get install --no-install-recommends -y build-essential git ssh vim cmake 
