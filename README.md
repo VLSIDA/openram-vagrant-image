@@ -41,12 +41,6 @@ vagrant plugin install vagrant-vbguest
 ```
 vagrant ssh
 ```
-* Add the software to the fstab file:
-```
-sudo echo "UUID=562fd98c-b2e0-4c1a-a460-d724d8f606e4 /software       ext3    defaults        0       0" >> /etc/fstab
-sudo mkdir /software
-sudo mount /software
-```
 
 # Windows Subsystem for Linux (WSL) #
 If you are using Vagrant in WSL2, you must put the cloned repo in
