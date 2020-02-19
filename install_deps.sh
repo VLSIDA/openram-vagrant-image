@@ -23,6 +23,7 @@ apt-get install --no-install-recommends -y libx11-dev libcairo2-dev
 apt-get install --no-install-recommends -y libglu1-mesa-dev freeglut3-dev mesa-common-dev
 # Needed by virtuoso
 apt-get install --no-install-recommends -y ksh libc6-i386
+ln -s libXpm.so.4 libXp.so.6
 # Needed by Synopsys design compiler
 apt-get install --no-install-recommends -y libjpeg62 libtiff5 libmng2 libpng16-16
 ln -s /usr/lib/x86_64-linux-gnu/libtiff.so.5 /usr/lib/x86_64-linux-gnu/libtiff.so.3 
