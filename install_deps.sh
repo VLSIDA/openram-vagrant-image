@@ -5,7 +5,7 @@ DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -
 #apt-get --no-install-recommends -y upgrade
 ### Dependencies ###
 # General tools for building etc.
-apt-get install --no-install-recommends -y build-essential git ssh vim cmake 
+apt-get install --no-install-recommends -y build-essential git ssh vim cmake apt-file
 apt-get install --no-install-recommends -y autoconf automake libtool bison flex
 # Use bash instead of dash
 rm /bin/sh && ln -s /bin/bash /bin/sh
