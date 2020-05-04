@@ -4,9 +4,9 @@
 # is an old one...
 #apt-get install --no-install-recommends -y magic
 cd
-git clone git://opencircuitdesign.com/magic-8.2
-cd magic-8.2
-git checkout magic-8.2
+git clone git://opencircuitdesign.com/magic-8.3
+cd magic-8.3
+git checkout magic-8.3
 ./configure && make && make install
 
 ### Ngspice ###
