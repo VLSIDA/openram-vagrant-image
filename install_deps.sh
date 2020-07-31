@@ -6,7 +6,7 @@ DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -
 ### Dependencies ###
 # General tools for building etc.
 apt-get install --no-install-recommends -y build-essential git ssh vim cmake apt-file
-apt-get install --no-install-recommends -y autoconf automake libtool bison flex
+apt-get install --no-install-recommends -y autoconf automake libtool bison flex libncurses5-dev
 # Use bash instead of dash
 rm /bin/sh && ln -s /bin/bash /bin/sh
 # Needed by OpenRAM 
